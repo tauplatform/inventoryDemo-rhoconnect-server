@@ -1,10 +1,10 @@
 require 'json'
 require 'rest_client'
 
-class Report < Rhoconnect::Model::Base
+class InventoryItem < Rhoconnect::Model::Base
 
   def initialize(source)
-    @base = 'http://taustore.herokuapp.com/reports'
+    @base = 'http://taustore.herokuapp.com/inventory_items'
     super(source)
   end
 
@@ -13,12 +13,12 @@ class Report < Rhoconnect::Model::Base
 
     @result={}
     parsed.each do |item|
-      @result[item["report"]["id"].to_s] = item["report"]
+      @result[item["inventory_item"]["id"].to_s] = item["inventory_item"]
     end if parsed
   end
 
   def create(create_hash)
-    res = RestClient.post(@base, :report => create_hash)
+    res = RestClient.post(@base, :inventory_item => create_hash)
 
     # After create we are redirected to the new record.
     # We need to get the id of that record and return
@@ -27,13 +27,13 @@ class Report < Rhoconnect::Model::Base
     # created object on the server
     JSON.parse(
         RestClient.get("#{res.headers[:location]}.json").body
-    )["report"]["id"]
+    )["inventory_item"]["id"]
   end
 
   def update(update_hash)
     obj_id = update_hash['id']
     update_hash.delete('id')
-    RestClient.put("#{@base}/#{obj_id}", :report => update_hash)
+    RestClient.put("#{@base}/#{obj_id}", :inventory_item => update_hash)
   end
 
   def delete(delete_hash)
