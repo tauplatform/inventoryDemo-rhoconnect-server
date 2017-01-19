@@ -53,7 +53,7 @@ class Report < Rhoconnect::Model::Base
 
     url = 'https://taustore.herokuapp.com/upload'
 
-    RestClient.post(url, {
+    response = RestClient.post(url, {
         :file => File.new(blob[:tempfile].path, 'rb'),
         :filename => blob[:filename],
         :accept => :json
