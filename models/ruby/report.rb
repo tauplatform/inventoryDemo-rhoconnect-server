@@ -55,7 +55,7 @@ class Report < Rhoconnect::Model::Base
 
     RestClient.post(url, {
         :file => File.new(blob[:tempfile].path, 'rb'),
-        :filename => "camera.png",
+        :filename => blob[:filename],
         :accept => :json
     })
 
