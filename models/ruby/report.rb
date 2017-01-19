@@ -51,16 +51,20 @@ class Report < Rhoconnect::Model::Base
     #     :accept => :json
     # )
 
+    extension = File.extname(blob[:filename])
+    filename = "#{SecureRandom.uuid}#{extension}"
+
     url = 'https://taustore.herokuapp.com/upload'
 
     response = RestClient.post(url, {
         :file => File.new(blob[:tempfile].path, 'rb'),
-        :filename => blob[:filename],
+        :filename => filename,
         :accept => :json
     })
 
     json = JSON.parse(response.body)
     puts "response json #{json}"
-    blob[:filename]
+
+    filename
   end
 end
