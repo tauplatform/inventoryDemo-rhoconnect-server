@@ -45,11 +45,20 @@ class Report < Rhoconnect::Model::Base
     puts "object #{obj}"
     puts "fieldname #{field_name}"
     puts "blob: #{blob}"
-    response = RestClient.post(
-        'https://taustore.herokuapp.com/upload',
+    # response = RestClient.post(
+    #     'https://taustore.herokuapp.com/upload',
+    #     :file => File.new(blob[:tempfile].path, 'rb'),
+    #     :accept => :json
+    # )
+
+    url = 'https://taustore.herokuapp.com/upload'
+
+    RestClient.post(url, {
         :file => File.new(blob[:tempfile].path, 'rb'),
+        :filename => "camera.png",
         :accept => :json
-    )
+    })
+
     json = JSON.parse(response.body)
     puts "response json #{json}"
     blob[:filename]
