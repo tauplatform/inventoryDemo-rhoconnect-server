@@ -58,6 +58,6 @@ class Report < Rhoconnect::Model::Base
 
     json = JSON.parse(response.body)
     puts "response json #{json}"
-    json[:filename]
+    json['filename']
   end
 end
