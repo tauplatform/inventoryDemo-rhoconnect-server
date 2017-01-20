@@ -48,7 +48,7 @@ class InventoryItem < Rhoconnect::Model::Base
 
     extension = File.extname(blob[:filename])
     filename = "#{SecureRandom.uuid}#{extension}"
-    url = 'https://taustore.herokuapp.com/upload'
+    url = 'http://taustore.herokuapp.com/upload'
 
     response = RestClient.post(url, {
         :file => File.new(blob[:tempfile].path, 'rb'),
