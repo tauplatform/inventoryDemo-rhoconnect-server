@@ -41,11 +41,6 @@ class InventoryItem < Rhoconnect::Model::Base
   end
 
   def store_blob(obj, field_name, blob)
-    puts ">>>>>>>>>>>>>>>>>>>>>> store_blob in model"
-    puts "object #{obj}"
-    puts "fieldname #{field_name}"
-    puts "blob: #{blob}"
-
     extension = File.extname(blob[:filename])
     filename = "#{SecureRandom.uuid}#{extension}"
     url = 'http://taustore.herokuapp.com/upload'
@@ -57,7 +52,6 @@ class InventoryItem < Rhoconnect::Model::Base
     })
 
     json = JSON.parse(response.body)
-    puts "response json #{json}"
     json['filename']
   end
 end
