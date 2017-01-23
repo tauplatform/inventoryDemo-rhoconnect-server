@@ -31,6 +31,9 @@ class InventoryItem < Rhoconnect::Model::Base
   end
 
   def update(update_hash)
+
+    puts "Update: #{update_hash}"
+
     obj_id = update_hash['id']
     update_hash.delete('id')
     RestClient.put("#{@base}/#{obj_id}", :inventory_item => update_hash)
@@ -41,6 +44,7 @@ class InventoryItem < Rhoconnect::Model::Base
   end
 
   def store_blob(obj, field_name, blob)
+    puts "store blob for field #{field_name}"
     extension = File.extname(blob[:filename])
     filename = "#{SecureRandom.uuid}#{extension}"
     url = 'http://taustore.herokuapp.com/upload'
@@ -52,6 +56,9 @@ class InventoryItem < Rhoconnect::Model::Base
     })
 
     json = JSON.parse(response.body)
+
+    puts "Filename on server: #{json['filename']}"
+
     json['filename']
   end
 end
