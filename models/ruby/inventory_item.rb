@@ -14,14 +14,19 @@ class InventoryItem < Rhoconnect::Model::Base
     # export AWS_ACCESS_KEY_ID=SHSKJHS_example
     # export AWS_SECRET_ACCESS_KEY=KJHGKJHGKJHGKJHGKJHG_example
     # export AWS_DEFAULT_REGION=us-west-2
+    #in case of AWS bug please set one else environment variable :
+    # export AWS_REGION=us-west-2
+    # by documentation you should set AWS_DEFAULT_REGION but aws looking for AWS_REGION !!!
+
     @s3 = Aws::S3::Client.new()
 
-
+    # bad style in case of your sources is public !
     #@s3 = Aws::S3::Client.new(
     #  access_key_id: 'SHSKJHS_example',
     #  secret_access_key: 'KJHGKJHGKJHGKJHGKJHG_example',
     #  region: 'us-west-2'
     #)
+
     @bucket = Aws::S3::Bucket.new('inventory-demo', {:client => @s3})
     super(source)
   end
