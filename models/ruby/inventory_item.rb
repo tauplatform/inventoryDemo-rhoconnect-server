@@ -78,7 +78,7 @@ class InventoryItem < Rhoconnect::Model::Base
 
     object.upload_file(blob[:tempfile].path, {:acl => 'public-read'})
 
-    public_url = object.public_url
+    public_url = object.public_url.gsub("https://","http://")
 
     puts "Public URL on server: #{public_url}"
 
