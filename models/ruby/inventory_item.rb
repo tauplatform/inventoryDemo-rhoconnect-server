@@ -66,6 +66,9 @@ class InventoryItem < Rhoconnect::Model::Base
   end
 
   def store_blob(obj, field_name, blob)
+    if blob == nil
+        return nil
+    end
     puts "Store blob for field [#{field_name}] blob[#{blob.to_s}]"
 
     extension = File.extname(blob[:filename])
