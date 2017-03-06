@@ -1,4 +1,6 @@
 :sources:
+  InventoryItem:
+    :poll_interval: 0
   Customer:
     :poll_interval: 0
   Product:
