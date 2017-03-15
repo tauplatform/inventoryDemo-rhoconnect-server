@@ -6,7 +6,7 @@ class InventoryItem < Rhoconnect::Model::Base
 
 
   def initialize(source)
-    @base = 'http://taustore.herokuapp.com/inventory_items'
+    @base = 'http://inventory-demo-backend.herokuapp.com/inventory_items'
 
 
 
