@@ -8,13 +8,11 @@ class InventoryItem < Rhoconnect::Model::Base
   def initialize(source)
     @base = 'http://inventory-demo-backend.herokuapp.com/inventory_items'
 
-
-
-    #for Amazon S3 service you must define next three environment variables (or you should define it programatically):
+    # for Amazon S3 service you must define next three environment variables (or you should define it programatically):
     # export AWS_ACCESS_KEY_ID=SHSKJHS_example
     # export AWS_SECRET_ACCESS_KEY=KJHGKJHGKJHGKJHGKJHG_example
     # export AWS_DEFAULT_REGION=us-west-2
-    #in case of AWS bug please set one else environment variable :
+    # in case of AWS bug please set one else environment variable :
     # export AWS_REGION=us-west-2
     # by documentation you should set AWS_DEFAULT_REGION but aws looking for AWS_REGION !!!
 
@@ -34,8 +32,10 @@ class InventoryItem < Rhoconnect::Model::Base
   def query(params=nil)
     puts "Query: #{params.to_s}"
     parsed = JSON.parse(RestClient.get("#{@base}.json").body)
+    puts "parsed is #{parsed}"
     @result={}
     parsed.each do |item|
+      puts "item is #{item}"
       @result[item["inventory_item"]["id"].to_s] = item["inventory_item"]
     end if parsed
     @result
