@@ -1,6 +1,6 @@
 require 'json'
 require 'rest_client'
-require 'aws-sdk'
+require 'aws-sdk-s3'
 
 class InventoryItem < Rhoconnect::Model::Base
 
@@ -30,13 +30,10 @@ class InventoryItem < Rhoconnect::Model::Base
   end
 
   def query(params=nil)
-    puts "Query: #{params.to_s}"
     parsed = JSON.parse(RestClient.get("#{@base}.json").body)
-    puts "parsed is #{parsed}"
     @result={}
     parsed.each do |item|
-      puts "item is #{item}"
-      @result[item["inventory_item"]["id"].to_s] = item["inventory_item"]
+      @result[item["id"].to_s] = item
     end if parsed
     @result
   end
@@ -66,9 +63,6 @@ class InventoryItem < Rhoconnect::Model::Base
   end
 
   def store_blob(obj, field_name, blob)
-    #if blob == nil
-    #    return nil
-    #end
     puts "Store blob for field [#{field_name}] blob[#{blob.to_s}]"
 
     extension = File.extname(blob[:filename])

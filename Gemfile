@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rhoconnect'
-gem 'aws-sdk'
+gem 'aws-sdk-s3', '~> 1.36'
 
 gemfile_path = File.join(File.dirname(__FILE__), ".rcgemfile")
 begin
