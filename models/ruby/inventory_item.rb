@@ -29,9 +29,10 @@ class InventoryItem < Rhoconnect::Model::Base
     super(source)
   end
 
-  def query(params=nil)
-    parsed = JSON.parse(RestClient.get("#{@base}.json").body)
-    @result={}
+  def query(params = nil)
+    res = RestClient.get("#{@base}.json", {params: {username: current_user.login}, content_type: :json, accept: :json})
+    parsed = JSON.parse(res.body)
+    @result = {}
     parsed.each do |item|
       @result[item["id"].to_s] = item
     end if parsed
@@ -40,15 +41,25 @@ class InventoryItem < Rhoconnect::Model::Base
 
   def create(create_hash)
     puts "Create: #{create_hash}"
-    res = RestClient.post(@base, :inventory_item => create_hash)
+    create_hash['username'] = current_user.login
+
     # After create we are redirected to the new record.
     # We need to get the id of that record and return
     # it as part of create so rhosync can establish a link
     # from its temporary object on the client to this newly
     # created object on the server
-    JSON.parse(
-        RestClient.get("#{res.headers[:location]}.json").body
-    )["inventory_item"]["id"]
+
+    RestClient.post(@base, :inventory_item => create_hash) { |response, request, result|
+      case response.code
+      when 302
+        res = RestClient.get("#{response.headers[:location]}.json")
+        data = JSON.parse(res.body)
+        return data["id"]
+      else
+        puts "#{response.code} => #{response}"
+        raise 'We expect here the response from the backend with code 302'
+      end
+    }
   end
 
   def update(update_hash)
@@ -72,7 +83,7 @@ class InventoryItem < Rhoconnect::Model::Base
 
     object.upload_file(blob[:tempfile].path, {:acl => 'public-read'})
 
-    public_url = object.public_url.gsub("https://","http://")
+    public_url = object.public_url.gsub("https://", "http://")
 
     puts "Public URL on server: #{public_url}"
 
