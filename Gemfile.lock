@@ -164,12 +164,15 @@ DEPENDENCIES
   puma (~> 1.6.0)
   rack-fiber_pool
   rack-test (~> 1.1.0)
-  rhoconnect (>= 6.2)
+  rhoconnect (>= 7.1.17)
   rhomobile-debug (>= 1.0.2)
   rspec (~> 3.8)
   thin
   warbler
   win32-process (= 0.6.6)
+
+RUBY VERSION
+   ruby 2.6.3p62
 
 BUNDLED WITH
    1.17.3
