@@ -30,6 +30,8 @@ class InventoryItem < Rhoconnect::Model::Base
   end
 
   def query(params = nil)
+    puts "Query: #{params}"
+
     res = RestClient.get("#{@base}.json", {params: {username: current_user.login}, content_type: :json, accept: :json})
     parsed = JSON.parse(res.body)
     @result = {}
@@ -39,9 +41,9 @@ class InventoryItem < Rhoconnect::Model::Base
     @result
   end
 
-  def create(create_hash)
-    puts "Create: #{create_hash}"
-    create_hash['username'] = current_user.login
+  def create(params)
+    puts "Create: #{params}"
+    params['username'] = current_user.login
 
     # After create we are redirected to the new record.
     # We need to get the id of that record and return
@@ -49,7 +51,7 @@ class InventoryItem < Rhoconnect::Model::Base
     # from its temporary object on the client to this newly
     # created object on the server
 
-    RestClient.post(@base, :inventory_item => create_hash) { |response, request, result|
+    RestClient.post(@base, :inventory_item => params) { |response, request, result|
       case response.code
       when 302
         res = RestClient.get("#{response.headers[:location]}.json")
@@ -62,15 +64,16 @@ class InventoryItem < Rhoconnect::Model::Base
     }
   end
 
-  def update(update_hash)
-    puts "Update: #{update_hash}"
-    obj_id = update_hash['id']
-    update_hash.delete('id')
-    RestClient.put("#{@base}/#{obj_id}", :inventory_item => update_hash)
+  def update(params)
+    puts "Update: #{params}"
+
+    obj_id = params['id']
+    params.delete('id')
+    RestClient.put("#{@base}/#{obj_id}", {:inventory_item => params}.to_json, {content_type: :json, accept: :json})
   end
 
-  def delete(delete_hash)
-    RestClient.delete("#{@base}/#{delete_hash['id']}")
+  def delete(params)
+    RestClient.delete("#{@base}/#{params['id']}")
   end
 
   def store_blob(obj, field_name, blob)
