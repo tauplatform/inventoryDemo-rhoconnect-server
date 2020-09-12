@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 ruby "~> 2.6.3"
 
 gem 'rhoconnect', '>= 7.1.17'
+gem 'rhoconnect-auth-ext'
 gem 'aws-sdk-s3', '~> 1.36'
 
 gemfile_path = File.join(File.dirname(__FILE__), ".rcgemfile")

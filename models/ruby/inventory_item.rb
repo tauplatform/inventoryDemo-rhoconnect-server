@@ -6,6 +6,7 @@ class InventoryItem < Rhoconnect::Model::Base
 
 
   def initialize(source)
+
     @base = 'http://inventory-demo-backend.herokuapp.com/inventory_items'
 
     # for Amazon S3 service you must define next three environment variables (or you should define it programatically):
@@ -29,8 +30,13 @@ class InventoryItem < Rhoconnect::Model::Base
     super(source)
   end
 
+  def custom_auth
+    puts "auth is: #{@auth_token}"
+    raise Rhoconnect::Model::ServerErrorException.new("Bad auth") unless (@auth_token=='ifoundit')
+  end
+
   def query(params = nil)
-    puts "Query: #{params}"
+    custom_auth
 
     res = RestClient.get("#{@base}.json", {params: {username: current_user.login}, content_type: :json, accept: :json})
     parsed = JSON.parse(res.body)
@@ -42,8 +48,7 @@ class InventoryItem < Rhoconnect::Model::Base
   end
 
   def create(params)
-    puts "Create: #{params}"
-    params['username'] = current_user.login
+    custom_auth
 
     # After create we are redirected to the new record.
     # We need to get the id of that record and return
@@ -65,7 +70,7 @@ class InventoryItem < Rhoconnect::Model::Base
   end
 
   def update(params)
-    puts "Update: #{params}"
+    custom_auth
 
     obj_id = params['id']
     params.delete('id')
@@ -73,12 +78,16 @@ class InventoryItem < Rhoconnect::Model::Base
   end
 
   def delete(params)
+    custom_auth
+
     RestClient.delete("#{@base}/#{params['id']}")
   end
 
   def store_blob(obj, field_name, blob)
-    puts "Store blob for field [#{field_name}] blob[#{blob.to_s}]"
+    custom_auth
 
+    puts "Store blob for field [#{field_name}] blob[#{blob.to_s}]"    
+    
     extension = File.extname(blob[:filename])
     key = "#{SecureRandom.uuid}#{extension}"
 

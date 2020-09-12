@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'rhoconnect/application/init'
+require 'rhoconnect-auth-ext'
 
 # secret is generated along with the app
 Rhoconnect::Server.set     :secret,      'd4c5aa1e0441c5bc645768e0015c2b127568cd8f6fd4448cd374e4409759749b5e326640768ef2d1c6f5d718f4657e9d9b2106d236ba6d6002bd80c8bc0fc4da'

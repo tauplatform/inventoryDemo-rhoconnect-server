@@ -5,7 +5,10 @@ class ApplicationController < Rhoconnect::Controller::AppBase
                  :deprecated_route => {:verb => :post, :url => ['/application/clientlogin', '/api/application/clientlogin']} do
     login = params[:login]
     password = params[:password]
-    true # do some interesting authentication here...
+
+    puts "login auth: #{@auth_token}"
+
+    return @auth_token=='ifoundit'
   end
 
   get "/rps_login", :rc_handler => :rps_authenticate, 
