@@ -20,7 +20,7 @@
   :iphoneport: 2195
   :mdsserver: 127.0.0.1
   :mdsserverport: 8080
-  :redis: redis://redistogo:daf4b282fc4f00e8fa1691f6d0b5ff7a@sculpin.redistogo.com:10987/
+  :redis: <%= ENV['REDISCLOUD_URL'] %>
   :syncserver: http://localhost:9292/application/
 :test: 
   :licensefile: settings/license.key
@@ -30,7 +30,7 @@
   :iphoneport: 2195
   :mdsserver: 127.0.0.1
   :mdsserverport: 8080
-  :redis: redis://redistogo:daf4b282fc4f00e8fa1691f6d0b5ff7a@sculpin.redistogo.com:10987/
+  :redis: <%= ENV['REDISCLOUD_URL'] %>
   :syncserver: http://localhost:9292/application/
 :production: 
   :licensefile: settings/license.key
@@ -40,5 +40,5 @@
   :iphoneport: 2195
   :mdsserver: 127.0.0.1
   :mdsserverport: 8080
-  :redis: redis://redistogo:daf4b282fc4f00e8fa1691f6d0b5ff7a@sculpin.redistogo.com:10987/
+  :redis: <%= ENV['REDISCLOUD_URL'] %>
   :syncserver: http://localhost:9292/application/
