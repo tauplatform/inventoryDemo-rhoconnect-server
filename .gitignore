@@ -1,3 +1,6 @@
 .DS-store
 .idea/
 dev-server.sh
+
+inventory-demo-rhoconnect/
+.agents/
