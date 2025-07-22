@@ -22,7 +22,7 @@ COPY . .
 
 # Expose the port the app runs on
 # The Procfile uses $PORT, which Heroku will set. We'll use a default for local running.
-EXPOSE 8080
+#EXPOSE 8080
 
 # The command to run the application, from the Procfile
-CMD ["bundle", "exec", "thin", "start", "-p", "8080", "-e", "production"]
+#CMD ["bundle", "exec", "thin", "start", "-p", "8080", "-e", "production"]

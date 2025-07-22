@@ -1,3 +1,8 @@
 build:
   docker:
     web: Dockerfile
+
+run:
+  web: |
+    export REDIS_URL=$REDISCLOUD_URL
+    command: bundle exec thin start -p $PORT -e production
