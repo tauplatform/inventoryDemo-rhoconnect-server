@@ -7,6 +7,8 @@ WORKDIR /usr/src/app
 # Install dependencies
 # The base image comes with a compatible version of bundler.
 # No need to install it again.
+RUN gem install bundler -v 1.17.3
+
 
 # Copy Gemfile and Gemfile.lock
 COPY Gemfile Gemfile.lock ./
@@ -15,7 +17,8 @@ COPY Gemfile Gemfile.lock ./
 COPY .rcgemfile .rcgemfile
 
 # Install gems
-RUN bundle install
+#RUN bundle install
+RUN bundle _1.17.3_ install
 
 # Copy the rest of the application code
 COPY . .
