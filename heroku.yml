@@ -4,5 +4,6 @@ build:
 
 run:
   web: export REDISTOGO_URL=$REDISCLOUD_URL && bundle exec thin start -p $PORT -e production
+  worker: export REDISTOGO_URL=$REDISCLOUD_URL && QUEUE=* rake resque:work
 
     
