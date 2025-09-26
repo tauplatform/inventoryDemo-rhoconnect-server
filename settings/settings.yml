@@ -11,34 +11,34 @@
     :poll_interval: 0
   Product_s:
     :poll_interval: 0
-    
+
 :development:
   :licensefile: settings/license.key
   :iphonecertfile: settings/apple_push_cert.pem
-  :iphonepassphrase: 
+  :iphonepassphrase:
   :iphoneserver: gateway.sandbox.push.apple.com
   :iphoneport: 2195
   :mdsserver: 127.0.0.1
   :mdsserverport: 8080
-  :redis: redis://default:k48O5TbaEI02puZdW63sgzpwnnNlSe06@redis-16072.c92.us-east-1-3.ec2.redns.redis-cloud.com:16072
+  :redis: redis://default:6dJ4sP3dWz7jlo8LbWIRjhHGqcvPxkEa@redis-14027.crce214.us-east-1-3.ec2.redns.redis-cloud.com:14027
   :syncserver: http://localhost:9292/application/
-:test: 
+:test:
   :licensefile: settings/license.key
   :iphonecertfile: settings/apple_push_cert.pem
-  :iphonepassphrase: 
+  :iphonepassphrase:
   :iphoneserver: gateway.sandbox.push.apple.com
   :iphoneport: 2195
   :mdsserver: 127.0.0.1
   :mdsserverport: 8080
-  :redis: redis://default:k48O5TbaEI02puZdW63sgzpwnnNlSe06@redis-16072.c92.us-east-1-3.ec2.redns.redis-cloud.com:16072
+  :redis: redis://default:6dJ4sP3dWz7jlo8LbWIRjhHGqcvPxkEa@redis-14027.crce214.us-east-1-3.ec2.redns.redis-cloud.com:14027
   :syncserver: http://localhost:9292/application/
-:production: 
+:production:
   :licensefile: settings/license.key
   :iphonecertfile: settings/apple_push_cert.pem
-  :iphonepassphrase: 
+  :iphonepassphrase:
   :iphoneserver: gateway.sandbox.push.apple.com
   :iphoneport: 2195
   :mdsserver: 127.0.0.1
   :mdsserverport: 8080
-  :redis: redis://default:k48O5TbaEI02puZdW63sgzpwnnNlSe06@redis-16072.c92.us-east-1-3.ec2.redns.redis-cloud.com:16072
+  :redis: redis://default:6dJ4sP3dWz7jlo8LbWIRjhHGqcvPxkEa@redis-14027.crce214.us-east-1-3.ec2.redns.redis-cloud.com:14027
   :syncserver: http://localhost:9292/application/
